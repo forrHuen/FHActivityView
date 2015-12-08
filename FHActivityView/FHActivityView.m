@@ -99,6 +99,7 @@
     }
     [self removeConstraints:self.vEndConstranints];
     [self addConstraints:self.vBeginConstranints];
+    [self.superview layoutIfNeeded];
     [self.tipButton setTitle:text forState:UIControlStateNormal];
     [self.activityIndicatorView startAnimating];
     if (self.activityBlock)
@@ -119,6 +120,7 @@
     [self.activityIndicatorView stopAnimating];
     [self removeConstraints:self.vBeginConstranints];
     [self addConstraints:self.vEndConstranints];
+    [self.superview layoutIfNeeded];
 }
 
 /** 是否在旋转活动 */
@@ -161,16 +163,20 @@
 }
 
 
-+ (void)removeFromView:(UIView *)view
++ (void)hideFromView:(UIView *)view
 {
     FHActivityView *currentView = (FHActivityView *)[view viewWithTag:2048];
-    [currentView removeFromSuperview];
+    currentView.hidden = YES;
+    currentView.tipButton.hidden = YES;
+    [currentView.activityIndicatorView stopAnimating];
 }
 
 
 + (void)endLoadInView:(UIView *)view message:(NSString *)tip enable:(BOOL)enable
 {
     FHActivityView *currentView = (FHActivityView *)[view viewWithTag:2048];
+    currentView.hidden = NO;
+    currentView.tipButton.hidden = NO;
     [currentView endActivityingEndTip:tip];
     currentView.tipButton.enabled = enable;
 }

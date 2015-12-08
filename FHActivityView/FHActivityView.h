@@ -38,11 +38,11 @@
 
 
 /**
- *  从父视图中移除加载视图
+ *  从父视图中隐藏加载视图
  *
  *  @param view 父视图
  */
-+ (void)removeFromView:(UIView *)view;
++ (void)hideFromView:(UIView *)view;
 
 /**
  *  结束加载动作
